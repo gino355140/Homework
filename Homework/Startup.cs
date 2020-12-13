@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Homework.Database;
+using Homework.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,11 +27,14 @@ namespace Homework
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //DB
             services.AddDbContext<BlogDbContext>(
                  options =>
                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
-
+            //Service
+            services.AddTransient<IBlogService, BlogService>();
+            //Controller
             services.AddControllersWithViews();
         }
 
