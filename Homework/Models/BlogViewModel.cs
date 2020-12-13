@@ -1,4 +1,5 @@
 ﻿using Homework.Domain;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,17 @@ namespace Homework.Models
 {
     public class BlogViewModel
     {
-        public BlogViewModel() { ArticlesList = new List<Articles>(); }
+        public BlogViewModel()
+        {
+            VisiblePage = 5;
+        }
 
-        public List<Articles> ArticlesList { get; set; }
+        public IPagedList<Articles> ArticlesList { get; set; }
 
         public TagCloud TagCloud { get; set; }
 
+        public int TotalAcount { get; set; }
+
+        public int VisiblePage { get; set; }
     }
 }

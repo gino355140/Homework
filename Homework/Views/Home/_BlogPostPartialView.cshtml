@@ -1,6 +1,5 @@
 ﻿@using Homework.Domain
 @model Homework.Models.BlogViewModel
-
 <!-- Blog Post -->
 @foreach (var articles in Model.ArticlesList)
 {
@@ -17,3 +16,15 @@
         </div>
     </div>
 }
+
+<script>
+    $('#pagination').twbsPagination({
+        totalPages: '@Model.ArticlesList.PageCount',
+        visiblePages: '@Model.VisiblePage',
+        onPageClick: function (event, page) {
+            gotoPage(page);
+        }
+    });
+</script>
+
+

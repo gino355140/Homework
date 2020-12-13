@@ -9,27 +9,26 @@
 
 <!-- BlogPartialView -->
 <div id="blogPartialView">
-    
 </div>
 
 <!-- Pagination -->
-<ul class="pagination justify-content-center mb-4">
-    <li class="page-item">
-        <a class="page-link" href="#">&larr; Older</a>
-    </li>
-    <li class="page-item disabled">
-        <a class="page-link" href="#">Newer &rarr;</a>
-    </li>
+<ul id="pagination" class="pagination justify-content-center mb-4">
 </ul>
 
-@section Scripts{ 
+@section Scripts{
     <script>
-        $.ajax({
-            url: '@Url.Action("BlogPostPartialView", "Home")',
+        gotoPage(1)
+
+        function gotoPage(page) {
+            if (page == null || page < 1)
+                return;
+            $.ajax({
+                url: '@Url.Action("GetBlogPosts", "Home")',
+                data: { page: page },
             success: function (result) {
-                //console.log(result);
                 $("#blogPartialView").html(result)
             }
         })
+        }
     </script>
 }
