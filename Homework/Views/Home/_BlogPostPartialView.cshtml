@@ -1,0 +1,19 @@
+﻿@using Homework.Domain
+@model Homework.Models.BlogViewModel
+
+<!-- Blog Post -->
+@foreach (var articles in Model.ArticlesList)
+{
+    <div class="card mb-4">
+        <img class="card-img-top" src="@articles.CoverPhoto" alt="Card image cap">
+        <div class="card-body">
+            <h2 class="card-title">@articles.Title</h2>
+            <p class="card-text">@Html.Raw(articles.Body)</p>
+            <a href="#" class="btn btn-primary">Read More &rarr;</a>
+        </div>
+        <div class="card-footer text-muted">
+            Posted on @articles.CreateDate.ToUsDateString("D")) by
+            <a href="#">Start Bootstrap</a>
+        </div>
+    </div>
+}
