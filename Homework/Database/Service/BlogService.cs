@@ -38,5 +38,19 @@ namespace Homework.Database
 
             return result;
         }
+
+        public IPagedList<Domain.Articles> GetArticles(string searchKeyWord, int page, int pageSize)
+        {
+            var daoArticles = _dbContext.Articles
+                .Where(x => x.Title.Contains(searchKeyWord) || x.Body.Contains(searchKeyWord))
+                .OrderBy(x => x.CreateDate);
+
+            var config = new AutoMapper.MapperConfiguration(cfg => cfg.AddProfile<ServiceMappings>());
+            var mapper = config.CreateMapper(); // 用設定檔建立 Mapper
+            var domainList = mapper.Map<List<Domain.Articles>>(daoArticles); // 轉換型別
+            var result = domainList.ToPagedList<Domain.Articles>(page, pageSize); // 轉換PageList
+
+            return result;
+        }
     }
 }

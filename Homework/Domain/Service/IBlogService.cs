@@ -11,5 +11,7 @@ namespace Homework.Domain
         List<Articles> GetArticles();
 
         IPagedList<Articles> GetArticles(int page, int pageSize);
+
+        IPagedList<Articles> GetArticles(string searchKeyWord,int page, int pageSize);
     }
 }

@@ -10,10 +10,10 @@
 <!-- BlogPartialView -->
 <div id="blogPartialView">
 </div>
-
 <!-- Pagination -->
 <ul id="pagination" class="pagination justify-content-center mb-4">
 </ul>
+
 
 @section Scripts{
     <script>
@@ -24,11 +24,20 @@
                 return;
             $.ajax({
                 url: '@Url.Action("GetBlogPosts", "Home")',
-                data: { page: page },
-            success: function (result) {
-                $("#blogPartialView").html(result)
-            }
-        })
+                data: { page: page, searchKeyWord: $("#searchKeyWord").val() },
+                success: function (result) {
+                    $("#blogPartialView").html(result);
+                }
+            })
         }
+
+        $("#searchBtn").click(function () {
+
+            //$('#pagination').empty();
+            //$('#pagination').removeData("twbs-pagination");
+            //$('#pagination').unbind('page');
+
+            gotoPage(1);
+        })
     </script>
 }

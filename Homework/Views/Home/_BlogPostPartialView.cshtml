@@ -17,10 +17,13 @@
     </div>
 }
 
+
 <script>
     $('#pagination').twbsPagination({
         totalPages: '@Model.ArticlesList.PageCount',
         visiblePages: '@Model.VisiblePage',
+        initiateStartPageClick: true,
+        hideOnlyOnePage: true,
         onPageClick: function (event, page) {
             gotoPage(page);
         }

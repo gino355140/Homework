@@ -26,11 +26,13 @@ namespace Homework.Controllers
             return View();
         }
 
-        public IActionResult GetBlogPosts(int page)
+        public IActionResult GetBlogPosts(int page, string searchKeyWord = null)
         {
             BlogViewModel viewModel = new BlogViewModel();
-
-            viewModel.ArticlesList = _blogService.GetArticles(page, viewModel.VisiblePage);
+            if (string.IsNullOrEmpty(searchKeyWord))
+                viewModel.ArticlesList = _blogService.GetArticles(page, viewModel.VisiblePage);
+            else
+                viewModel.ArticlesList = _blogService.GetArticles(searchKeyWord, page, viewModel.VisiblePage);
 
             return PartialView("_BlogPostPartialView", viewModel);
         }
